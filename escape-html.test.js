@@ -8,6 +8,11 @@ describe("Annotater escapeHtml", () => {
       ["ampersand", "foo & bar", "foo &amp; bar"],
       ["double quote", 'foo " bar', "foo &quot; bar"],
       ["single quote", "foo ' bar", "foo &#039; bar"],
+      [
+        "all chars",
+        "<foo> & bar \"baz\" 'qux'",
+        "&lt;foo&gt; &amp; bar &quot;baz&quot; &#039;qux&#039;",
+      ],
     ])("%s", (name, plain, escaped) => {
       expect(escapeHtml(plain)).toEqual(escaped);
     });

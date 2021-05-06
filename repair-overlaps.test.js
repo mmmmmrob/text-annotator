@@ -28,5 +28,5 @@ describe("Annotater repairOverlaps", () => {
 
   it.todo("should repair several overlapping annotations");
 
-  it.todo("should repair several overlapping annotations out of order");
+  it.todo("should repair several overlapping annotations when out of order");
 });
