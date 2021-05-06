@@ -1,13 +1,16 @@
 const { insertAt } = require("./insert-at");
 const { shiftIndexes } = require("./shift-indexes");
+const {
+  annotationRelationship,
+  RELATIONSHIPS,
+} = require("./annotation-relationship");
+
+const { A_SURROUNDS_B, A_MATCHES_B } = RELATIONSHIPS;
 
 const findNestedAnnotations = (annotations, annotation) => {
   return annotations.filter((candidate) => {
-    return (
-      !candidate.started &&
-      candidate.openIndex >= annotation.openIndex &&
-      candidate.closeIndex <= annotation.closeIndex
-    );
+    const rel = annotationRelationship(annotation, candidate);
+    return !candidate.started && (rel === A_SURROUNDS_B || rel === A_MATCHES_B);
   });
 };
 
@@ -29,7 +32,8 @@ const applyAnnotation = (text, annotations, annotation) => {
 module.exports = {
   ...require("./escape-html"),
   ...require("./repair-overlaps"),
-  ...require("./annotation-relationship"),
+  annotationRelationship,
+  RELATIONSHIPS,
   annotate(text, annotations) {
     annotations.forEach((annotation) => {
       text = applyAnnotation(text, annotations, annotation);
