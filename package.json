@@ -1,0 +1,14 @@
+{
+  "name": "html-tag-annotator",
+  "version": "1.0.0",
+  "description": "Applies an array of annotations to a piece of text.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Rob Styles",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^26.6.3"
+  }
+}
