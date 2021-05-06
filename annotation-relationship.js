@@ -31,8 +31,10 @@ module.exports = {
     if (ao >= bo && ac <= bc) return A_INSIDE_B;
     if (ao <= bo && ac <= bc) return A_OVERLAPPED_BY_B;
     if (ao >= bo && ac >= bc) return A_OVERLAPS_B;
-    const errorMessage = `Indexes don't match an expected pattern: [[${ao},${ac}],[${bo},${bc}]]`;
-    throw new Error(errorMessage);
+    /* istanbul ignore next */
+    throw new Error(
+      `Indexes don't match an expected pattern: [[${ao},${ac}],[${bo},${bc}]]`
+    );
   },
   RELATIONSHIPS,
 };
