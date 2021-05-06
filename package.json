@@ -1,5 +1,5 @@
 {
-  "name": "html-tag-annotator",
+  "name": "text-annotator",
   "version": "1.0.0",
   "description": "Applies an array of annotations to a piece of text.",
   "main": "index.js",
