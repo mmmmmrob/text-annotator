@@ -26,6 +26,7 @@ module.exports = {
     let overlapPair;
     while ((overlapPair = findFirstOverlap(annotations))) {
       const [a, b] = overlapPair;
+      //Replace a with two annotations, split either side of b, to fix the overlap
       annotations.splice(
         annotations.indexOf(a),
         1,
