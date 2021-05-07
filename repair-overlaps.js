@@ -5,7 +5,7 @@ const {
 
 const { A_OVERLAPPED_BY_B } = RELATIONSHIPS;
 
-function findFirstOverlap(annotations) {
+const findFirstOverlap = (annotations) => {
   const pairs = [];
   annotations.forEach((a) => {
     annotations.forEach((b) => {
@@ -16,7 +16,7 @@ function findFirstOverlap(annotations) {
     return annotationRelationship(a, b) === A_OVERLAPPED_BY_B;
   });
   return firstOverlappingPair;
-}
+};
 
 module.exports = {
   containsOverlaps(annotations) {
