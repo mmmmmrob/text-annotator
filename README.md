@@ -1,6 +1,6 @@
 # Text Annotator
 
-# Intro
+## Intro
 
 Text Annotator applies an array of annotations to some plain text to create marked-up text.
 
