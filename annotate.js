@@ -1,39 +1,14 @@
-const { insertAt } = require("./insert-at");
-const { shiftIndexes } = require("./shift-indexes");
-const {
-  annotationRelationship,
-  RELATIONSHIPS,
-} = require("./annotation-relationship");
-
-const { A_SURROUNDS_B, A_MATCHES_B } = RELATIONSHIPS;
-
-const findNestedAnnotations = (annotations, annotation) => {
-  return annotations.filter((candidate) => {
-    const rel = annotationRelationship(annotation, candidate);
-    return !candidate.started && (rel === A_SURROUNDS_B || rel === A_MATCHES_B);
-  });
-};
-
-const applyAnnotation = (text, annotations, annotation) => {
-  if (annotation.finished) return text;
-  annotation.started = true;
-  const nestedAnnotations = findNestedAnnotations(annotations, annotation);
-  nestedAnnotations.forEach((nestedAnnotation) => {
-    text = applyAnnotation(text, annotations, nestedAnnotation);
-  });
-  text = insertAt(text, annotation.closeIndex, annotation.closeTag);
-  shiftIndexes(annotations, annotation.closeIndex, annotation.closeTag.length);
-  text = insertAt(text, annotation.openIndex, annotation.openTag);
-  shiftIndexes(annotations, annotation.openIndex, annotation.openTag.length);
-  annotation.finished = true;
-  return text;
-};
-
 module.exports = {
   annotate(text, annotations) {
-    annotations.forEach((annotation) => {
-      text = applyAnnotation(text, annotations, annotation);
+    const exploded = [...text];
+    annotations.sort(
+      //Sort into right-to-left and nested order
+      (a, b) => b.openIndex - a.openIndex || a.closeIndex - b.closeIndex || -1
+    );
+    annotations.forEach(({ openIndex, closeIndex, openTag, closeTag }) => {
+      exploded[openIndex] = openTag + exploded[openIndex];
+      exploded[closeIndex - 1] = exploded[closeIndex - 1] + closeTag;
     });
-    return text;
+    return exploded.join("");
   },
 };

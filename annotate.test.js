@@ -137,6 +137,20 @@ describe("Annotator annotate", () => {
     });
   });
 
-  it.todo("should throw errors");
+  it("should handle repaired annotations", () => {
+    const annotations = [
+      { openTag: "<zip>", closeTag: "</zip>", openIndex: 0, closeIndex: 3 },
+      { openTag: "<zip>", closeTag: "</zip>", openIndex: 3, closeIndex: 12 },
+      { openTag: "<zap>", closeTag: "</zap>", openIndex: 3, closeIndex: 15 },
+    ];
+    const actual = annotate("foo bar baz qux qip", annotations);
+    const expected = "<zip>foo</zip><zap><zip> bar baz </zip>qux</zap> qip";
+    expect(actual).toBe(expected);
+  });
+
+  describe.todo("should throw an error", () => {
+    it("if any of the annotations overlap", () => {});
+  });
+
   it.todo("should cope with out of order");
 });
