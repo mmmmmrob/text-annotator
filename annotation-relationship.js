@@ -17,6 +17,7 @@ const RELATIONSHIPS = {
 };
 
 module.exports = {
+  RELATIONSHIPS,
   annotationRelationship(a, b) {
     const [ao, bo, ac, bc] = [
       a.openIndex,
@@ -36,5 +37,4 @@ module.exports = {
       `Indexes don't match an expected pattern: [[${ao},${ac}],[${bo},${bc}]]`
     );
   },
-  RELATIONSHIPS,
 };
