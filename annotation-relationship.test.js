@@ -1,4 +1,7 @@
-const { annotationRelationship, RELATIONSHIPS } = require(".");
+const {
+  annotationRelationship,
+  RELATIONSHIPS,
+} = require("./annotation-relationship");
 const {
   A_BEFORE_B,
   A_AFTER_B,
@@ -9,7 +12,7 @@ const {
   A_OVERLAPS_B,
 } = RELATIONSHIPS;
 
-describe("Annotater annotationRelationship", () => {
+describe("Annotator annotationRelationship", () => {
   it.each([
     [A_BEFORE_B, [0, 1], [1, 2]],
     [A_AFTER_B, [1, 2], [0, 1]],

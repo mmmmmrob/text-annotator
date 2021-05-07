@@ -1,6 +1,6 @@
 const { escapeHtml } = require(".");
 
-describe("Annotater escapeHtml", () => {
+describe("Annotator escapeHtml", () => {
   describe("should escape html special character", () => {
     it.each([
       ["less than", "foo < bar", "foo &lt; bar"],

@@ -1,6 +1,6 @@
 const { repairOverlaps } = require(".");
 
-describe("Annotater repairOverlaps", () => {
+describe("Annotator repairOverlaps", () => {
   it("should not repair distinct annotations", () => {
     const distinctAnnotations = [
       { openTag: "zip", openIndex: 0, closeIndex: 12 },

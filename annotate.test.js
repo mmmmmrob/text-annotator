@@ -1,6 +1,6 @@
 const { annotate } = require(".");
 
-describe("Annotater annotate", () => {
+describe("Annotator annotate", () => {
   describe("should apply a single annotation", () => {
     it("at the beginning", () => {
       const annotations = [
