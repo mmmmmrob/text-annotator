@@ -148,8 +148,16 @@ describe("Annotator annotate", () => {
     expect(actual).toBe(expected);
   });
 
-  describe.todo("should throw an error", () => {
-    it("if any of the annotations overlap", () => {});
+  describe("should throw an error", () => {
+    it("if any of the annotations overlap", () => {
+      const annotations = [
+        { openTag: "<zip>", closeTag: "</zip>", openIndex: 0, closeIndex: 12 },
+        { openTag: "<zap>", closeTag: "</zap>", openIndex: 3, closeIndex: 17 },
+      ];
+      expect(() => annotate("foo bar baz qux qip", annotations)).toThrow(
+        "Overlapping annotations found, use repairOverlaps to fix overlapping annotations before applying them."
+      );
+    });
   });
 
   it.todo("should cope with out of order");

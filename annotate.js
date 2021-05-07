@@ -1,5 +1,11 @@
+const { containsOverlaps } = require("./repair-overlaps");
+
+const overlapError =
+  "Overlapping annotations found, use repairOverlaps to fix overlapping annotations before applying them.";
+
 module.exports = {
   annotate(text, annotations) {
+    if (containsOverlaps(annotations)) throw overlapError;
     const exploded = [...text];
     annotations.sort(
       //Sort into right-to-left and nested order

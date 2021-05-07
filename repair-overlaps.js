@@ -19,6 +19,9 @@ function findFirstOverlap(annotations) {
 }
 
 module.exports = {
+  containsOverlaps(annotations) {
+    return !!findFirstOverlap(annotations);
+  },
   repairOverlaps(annotations) {
     let overlapPair;
     while ((overlapPair = findFirstOverlap(annotations))) {

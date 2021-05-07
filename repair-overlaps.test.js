@@ -1,6 +1,22 @@
-const { repairOverlaps } = require(".");
+const { containsOverlaps, repairOverlaps } = require(".");
 
 describe("Annotator repairOverlaps", () => {
+  it("should recognise when annotations don't overlap", () => {
+    const distinctAnnotations = [
+      { openTag: "zip", openIndex: 0, closeIndex: 12 },
+      { openTag: "zap", openIndex: 12, closeIndex: 99 },
+    ];
+    expect(containsOverlaps(distinctAnnotations)).toBe(false);
+  });
+
+  it("should recognise when annotations overlap", () => {
+    const overlappingAnnotations = [
+      { openTag: "zip", openIndex: 0, closeIndex: 12 },
+      { openTag: "zap", openIndex: 3, closeIndex: 17 },
+    ];
+    expect(containsOverlaps(overlappingAnnotations)).toBe(true);
+  });
+
   it("should not repair distinct annotations", () => {
     const distinctAnnotations = [
       { openTag: "zip", openIndex: 0, closeIndex: 12 },
