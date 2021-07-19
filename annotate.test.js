@@ -28,6 +28,19 @@ describe("Annotator annotate", () => {
       const expected = "foo bar baz qux <zip>qip</zip>";
       expect(actual).toBe(expected);
     });
+
+    it("around everything, with unicode characters", () => {
+      const annotations = [
+        { openTag: "<zip>", closeTag: "</zip>", openIndex: 0, closeIndex: 39 },
+      ];
+      const actual = annotate(
+        "পোঁদে কাঁটাতারের দাগ (pnodey kaanta-taarer daag)",
+        annotations
+      );
+      const expected =
+        "<zip>পোঁদে কাঁটাতারের দাগ (pnodey kaanta-taarer daag)</zip>";
+      expect(actual).toBe(expected);
+    });
   });
 
   describe("should apply distinct annotations", () => {

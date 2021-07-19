@@ -1,4 +1,5 @@
 const { containsOverlaps } = require("./repair-overlaps");
+const GraphemeBreaker = require("grapheme-breaker");
 
 const overlapError =
   "Overlapping annotations found, use repairOverlaps to fix overlapping annotations before applying them.";
@@ -6,7 +7,7 @@ const overlapError =
 module.exports = {
   annotate(text, annotations) {
     if (containsOverlaps(annotations)) throw overlapError;
-    const exploded = [...text];
+    const exploded = GraphemeBreaker.break(text);
     annotations.sort(
       //Sort into right-to-left and nested order
       (a, b) => b.openIndex - a.openIndex || a.closeIndex - b.closeIndex || -1
